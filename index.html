@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/h8k-design@latest/dist/index.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/npm/h8k-design@latest/dist/assets/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/h8k-components/dist/h8k-components/h8k-components.esm.js"
+        type="module"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/h8k-components/dist/h8k-components/h8k-components.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!--HTML content goes here-->
+
+    <h8k-navbar header="Quiz App!"></h8k-navbar>
+
+    <div id="quiz__instructions" class="w-50 mx-auto mt-40">
+        <div id="pre-quiz-instructions" data-testid="pre-quiz-instructions">
+            <ul>
+                <li>
+                    <p>The quiz will consist of 5 questions</p>
+                </li>
+                <li>
+                    <p> Each correct answer will give you 1 points</p>
+                </li>
+                <li>
+                    <p> There is no negative marking applicable</p>
+                </li>
+                <li>
+                    <p> The answer will be validated once the submit button is clicked </p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="my-40 layout-row justify-content-center">
+            <button data-testid="start-button" id="start-button">Start Test</button>
+        </div>
+    </div>
+
+    <div id="loader-view" data-testid="loader-view" class="none">
+        <section class="loader-container">
+            <span class="loader"></span>
+        </section>
+    </div>
+
+    <div id="quiz" class="container mx-auto w-50 none" data-testid="quiz">
+        <div class="card outlined mt-50 mb-50">
+            <section class="card-text">
+                <div class="layout-row justify-content-end align-items-center">
+                    <h4 class="mt-0 mb-0">📋Question : <span id="question-serial"></span></h4>
+                </div>
+            </section>
+        </div>
+        <div class="row">
+            <pre id="question" data-testid="question"></pre>
+        </div>
+
+        <div class="list-group" id="options-container" data-testid="options-container">
+
+        </div>
+
+        <div class="d-flex justify-content-end align-items-center text-center mt-10">
+            <button id="submit-button" data-testid="submit-button">
+                Submit
+            </button>
+            <button id="next-question" class="danger outlined none">Next</button>
+        </div>
+    </div>
+
+    <div class="card w-50 mx-auto none mt_8" id="quiz-result-container">
+        <section class="card-text">
+            <div class="layout-column justify-content-around align-items-center" id="quiz-results">
+            </div>
+            <div class="d-flex justify-content-end align-items-center text-center mt-10">
+                <button id="quiz-retry" class="secondary flat">Retry</button>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!--Do Not Modify the hidden inputs below-->
+    <div>
+        <input type="hidden" id="current-question-id" data-testid="current-question-id">
+    </div>
+    <!--Do Not Modify-->
+
+</body>
+<script src="./js/main.js"></script>
+<!-- HMR and test infrastructure - DO NOT EDIT -->
+<!-- <script src="./bundle.js"></script> -->
+
+</html>
