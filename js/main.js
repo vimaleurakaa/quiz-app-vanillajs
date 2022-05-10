@@ -18,14 +18,19 @@ const appConfig = {
   selectedState: false,
 };
 
-const fetchQuizData = ({ API, quizContainer }) => {
+const fetchQuizData = ({ API, quizContainer, loader }) => {
+  loader.classList.remove("none");
   return new Promise((resolve, reject) => {
     fetch(API)
       .then((raw) => raw.json())
       .then((data) => {
         appConfig.quizData = { ...{ ...data } };
-        quizContainer.classList.remove("none");
-        return resolve(data);
+        //this is just to simulate an actual api delay!
+        setTimeout(() => {
+          loader.classList.add("none");
+          quizContainer.classList.remove("none");
+          return resolve(data);
+        }, 1000);
       })
       .catch((e) => {
         reject(e);
@@ -87,6 +92,8 @@ const quizHandler = ({ stackTrace, quizData: { data }, question, optionsContaine
 const quizSelectHandler = ({ options, submitButton }) => {
   [...options].forEach((option) => {
     option.addEventListener("click", () => {
+      [...options].map((it) => it.parentElement.classList.remove("user-answer"));
+      option.parentElement.classList.add("user-answer");
       appConfig.selectedState = true;
       if (appConfig.selectedState) {
         submitButton.removeAttribute("disabled");
@@ -146,6 +153,7 @@ const startQuiz = ({ quizInstructions, quizStart, nextQuestion, quizRetry, quizC
   quizRetry.addEventListener("click", () => {
     appConfig.stackTrace = 0;
     appConfig.score = 0;
+    appConfig.quizResults.innerHTML = "";
     quizHandler(appConfig);
     quizContainer.classList.remove("none");
   });
